@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script  type="text/javascript"  src="../vue.js"></script>
+</head>
+       <!--
+          插值语法一般用在标签体的值{{}}
+          指令语法:用于解析标签(标签体,标签属性, 绑定事件)上，类似于v-bind
+       -->
+<body>
+    <div id="hello">
+        <h1>你好，{{name.toUpperCase()}}</h1>
+        <!-- v-bind: 还可以简写为: -->
+        <a :href="bing.url.toUpperCase()">跳转到{{bing.name}}</a>
+         <!--v-bind绑定指令，就把下面的url当成一个js表达式去执行了-->
+        <a v-bind:href="baidu.url">跳转到{{baidu.name}}</a>
+    </div>
+    <script  type="text/javascript"> 
+        Vue.config.productionTip = false;
+        const vm = new Vue({    
+            el:"#hello",    
+            data:{   
+                name : 'yy',
+                bing : {
+                    url : 'http://cn.bing.com',
+                    name : 'bing'
+                },
+                baidu : {
+                    name : '百度',
+                    url : 'http://baidu.com'
+                }
+                
+            }
+        })
+    </script>
+    
+</body>
+</html>

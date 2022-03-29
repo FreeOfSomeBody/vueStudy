@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script  type="text/javascript"  src="../vue.js"></script>
+</head>
+    <!--
+        1.想让Vue工作，就必须创建一个Vue实例，且要传入一个配置对象；
+        2.root容器里的代码依然符合html规范，只不过混入了一些特殊的Vue语法；
+        3.root容器里的代码被称为【Vue模板】；
+        4.Vue实例和容器是一一对应的；
+        5.真实开发中只有一个Vue实例，并且会配合着组件一起使用；
+        6.{{xxx}}中的xxx要写js表达式，且xxx可以自动读取到data中的所有属性；
+        7.一旦data中的数据发生改变，那么页面中用到该数据的地方也会自动更新；
+
+    -->
+<body>
+    <div id="hello">
+        <h1>你好，{{name.toUpperCase()}}</h1>
+    </div>
+    <script  type="text/javascript"> 
+        Vue.config.productionTip = false;
+        const vm = new Vue({    //vue实例和容器是一对一的 
+            el:"#hello",    //通过选择器绑定容器
+            data:{  //存储容器变量  
+                name : 'yy'
+            }
+        })
+    </script>
+    
+</body>
+</html>
