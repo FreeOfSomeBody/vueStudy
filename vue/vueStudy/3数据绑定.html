@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script  type="text/javascript"  src="../vue.js"></script>
+</head>
+<!-- 
+    单向绑定：v-bind 数据只能从data流向页面。
+    双向绑定：v-model 数据能在data和页面双向流动。
+    注：双向绑定一般应用于表单类元素上（select，input等）
+    v-model:value 简写为v-model 因为model默认收集的是value。
+ -->
+<body>
+    <div id="hello">
+       单向数据绑定<input type="text"  :value="name"> </br>
+       双向数据绑定<input type="text"  v-model="name"> 
+    </div>
+    <script  type="text/javascript"> 
+        Vue.config.productionTip = false;
+        const vm = new Vue({    //vue实例和容器是一对一的 
+            el:"#hello",    //通过选择器绑定容器
+            data:{  //存储容器变量   
+                name : '你好'
+            }
+        })
+        
+        setTimeout(() => {
+            
+        }, timeout);
+    </script>
+    
+</body>
+</html>

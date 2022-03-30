@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script  type="text/javascript"  src="../vue.js"></script>
+</head>
+<body>
+    <div id="hello">
+        <h1>你好，{{name}}</h1>
+    </div>
+    <script  type="text/javascript"> 
+        Vue.config.productionTip = false;
+        new Vue({    
+            el:"#hello",    
+            data:{   
+                name : 'yy'
+            }
+        })
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script  type="text/javascript"  src="../vue.js"></script>
+</head>
+
+<!-- 
+    vue所管理的函数不能使用箭头函数，否则this会指向window
+ -->
+<body>
+    <div id="hello">
+        <h1>你好，{{name}}</h1>
+    </div>
+    <script  type="text/javascript"> 
+        Vue.config.productionTip = false;
+        const v =  new Vue({    
+            // el:"#hello",  第一种，通过el对象指定    
+            // data:{   
+            //     name : 'yy'  第一种，data对象
+            // }
+            data() {
+                return {
+                    name: 'xx'
+                }
+            },  //第二种，data函数
+        })
+        v.$mount('#hello');  //第二种写法，通过Vue原型进行挂载。
+    </script>
+    
+</body>
+</html>
