@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script  type="text/javascript"  src="../vue.js"></script>
+</head>
+<!-- 
+    事件的基本使用
+        1.v-on:xx 或 @xx 绑定事件
+        2.事件的方法需要写在vm的methods对象中
+        3.$event是默认隐式的，但如果传参需要用$event占位声明
+ -->
+<body>
+    <div id="hello">
+        <h1>你好，{{name}}</h1>
+        <button v-on:click="check">点击提示（无参）</button>
+        <button @click="check2(777,$event)">点击提示（有参）</button>
+    </div>
+    <script  type="text/javascript"> 
+        Vue.config.productionTip = false;
+        new Vue({    
+            el:"#hello",    
+            data:{   
+                name : 'yy'
+            },
+            methods: {
+                check(){
+                    alert("哈喽！");
+                },
+                check2(number,event){
+                    alert(number);
+                    console.log(event);
+                }
+            }
+        })
+    </script>
+    
+</body>
+</html>

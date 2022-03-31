@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script  type="text/javascript"  src="../vue.js"></script>
+</head>
+<!-- 
+    1.vue的数据代理
+        通过vm对象来代理data对象中属性的操作。
+    2.原理
+        通过object.defineproperty()把data中属性添加到vm上，
+        为每一个添加到vm上的属性追加getter和setter，去操作属性
+ -->
+
+<body>
+    <div id="hello">
+        <h1>你好，{{name}},{{date}}</h1>
+    </div>
+    <script  type="text/javascript"> 
+        Vue.config.productionTip = false;
+        const vm = new Vue({    
+            el:"#hello",    
+            data:{   
+                name : 'yy',
+                date : new Date()
+            }
+        })
+    </script>
+    
+</body>
+</html>
