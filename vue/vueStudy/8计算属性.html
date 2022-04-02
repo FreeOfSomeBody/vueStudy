@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script  type="text/javascript"  src="../vue.js"></script>
+</head>
+<!-- 
+    计算属性： 
+        1.定义：通过对已有属性的计算，获得新的属性。
+        2.原理：低层通过object.defineproperty方法的getter和setter。
+        3.计算属性直接出现在vm上，对属性直接使用即可，不需要调用相关对象，内部存在缓存机制，增加了复用性。
+        4.通过set方法可以对已有属性进行修改。
+
+ -->
+<body>
+    <div id="hello">
+        <input type="text" v-model="firstName"></br>
+        <input type="text" v-model="lastName"><br>
+        <span>{{add()}}</span><br>
+        <span>{{name}}</span>
+    </div>
+    <script  type="text/javascript"> 
+        Vue.config.productionTip = false;
+        const vm = new Vue({    
+            el:"#hello",    
+            data:{   
+                firstName : '张',
+                lastName : '三'
+            },
+            methods: {
+                add(){
+                    return this.firstName+'--'+this.lastName;
+                }
+            },
+            // computed:{
+            //     name:{
+            //         get(){
+            //             console.log('get被调用了');
+            //             return this.firstName+'--'+this.lastName;
+            //         },
+            //         set(value){
+            //             console.log('set被调用了');
+            //             this.firstName=value;
+            //         }
+            //     }
+            // }
+
+            
+            //简写，在不使用set的时候可以这样写
+            //等于直接使用get方法，
+            computed:{
+                name(){
+                    console.log('get被调用了');
+                    return this.firstName+'--'+this.lastName;
+                }
+            }
+        })
+    </script>
+    
+</body>
+</html>

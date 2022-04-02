@@ -11,11 +11,40 @@
         2.事件的方法需要写在vm的methods对象中
         3.$event是默认隐式的，但如果传参需要用$event占位声明
  -->
+ <!-- 
+     事件修饰符
+        .stop：防止事件冒泡，等同于JavaScript中的event.stopPropagation()
+        .prevent：防止执行预设的行为，等同于JavaScript中的event.preventDefault()
+        .capture：捕获冒泡
+        .self：将事件绑定到自身，只有自身才能触发
+        .once：只触发一次
+        .passive：不阻止事件的默认行为
+  -->
+  <!-- 
+      键盘事件
+
+        别名	按键
+        .delete	delete（删除）/BackSpace（退格）
+        .tab	Tab
+        .enter	Enter（回车）
+        .esc	Esc（退出）
+        .space	Space（空格键）
+        .left	Left（左箭头）
+        .up	Up（上箭头）
+        .right	Right（右箭头）
+        .down	Down（下箭头）
+        .ctrl	Ctrl
+        .alt	Alt
+        .shift	Shift
+        .meta	(window系统下是window键，mac下是command键)
+   -->
 <body>
     <div id="hello">
         <h1>你好，{{name}}</h1>
         <button v-on:click="check">点击提示（无参）</button>
         <button @click="check2(777,$event)">点击提示（有参）</button>
+        <a href="http://cn.bing.com" @click.prevent="click()">点击到查询页面</a>
+        <input type="text"  @keydown.enter="down" @keyup.enter="up">
     </div>
     <script  type="text/javascript"> 
         Vue.config.productionTip = false;
@@ -31,6 +60,16 @@
                 check2(number,event){
                     alert(number);
                     console.log(event);
+                },
+                click(e){
+                    alert("你好");
+                },
+                down(e){
+                    alert("按下了空格");
+                },
+                up(e){
+                    console.log(e.target.value);
+                    alert("松开了空格");
                 }
             }
         })
