@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        .basic{
+            height: 10px;
+        }
+        .one{
+            width: 20px;
+        }
+        .two{
+            background: red;
+        }
+    </style>
+    <script  type="text/javascript"  src="../vue.js"></script>
+</head>
+<body>
+    <!-- 绑定class样式 可以写属性、对象、数组 等形式  绑定style也同理:style-->
+    <div :class="mode" :class="arr" :class="classobj"></div>
+
+    <div id="hello" class="basic" >
+        <h1>你好，{{name}}</h1>
+    </div>
+    <script  type="text/javascript"> 
+        Vue.config.productionTip = false;
+        new Vue({    
+            el:"#hello",    
+            data:{   
+                name : 'yy',
+                mode : 'one',
+                arr : ['basic','one','two'],
+                classobj : {
+                    one : true,
+                    two : false
+                }
+            }
+        })
+    </script>
+    
+</body>
+</html>

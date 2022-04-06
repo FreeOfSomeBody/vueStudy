@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script type="text/javascript" src="../vue.js"></script>
+</head>
+<!-- 
+    监视属性watch:
+        1.当被监控的属性改变时，自动调用回调函数。
+        2.监视属性必须存在才能进行监视。
+        3.有两种写法vm.$watch 和 new vue 中添加watch配置。
+        deep深度监视:
+            vue.watch默认不监视属性内部值的改变，开启deep后可以监视内部所有值的改变
+            Vue自身可以监听对象内部所有属性，但是watch默认不开启
+ -->
+<body>
+    <div id="hello">
+        <h1>今天是个{{info}}天气</h1>
+        <button @click="check">点击切换</button>
+    </div>
+    <script type="text/javascript">
+        Vue.config.productionTip = false;
+        const vm = new Vue({
+            el: "#hello",
+            data: {
+                good: 'true'
+            },
+            methods: {
+                check() {
+                    this.good = !this.good
+                }
+            },
+            computed: {
+                info() {
+                    return this.good ? '好' : '坏';
+                }
+            },
+            // watch: {
+            //     info:{
+            //         immediate : true,   //初始化时调用一次handler
+            //         handler(newValue, oldValue) {   //当监视发生改变时调用
+            //         console.log("newValue:" + newValue);
+            //         console.log("oldValue:"+ oldValue);
+            //         }
+            //     }
+            // }
+            // 简写： 
+            // watch: {
+            //     good(newValue, oldValue) {
+            //         console.log("newValue:" + newValue);
+            //         console.log("oldValue:" + oldValue);
+            //     }
+            // }
+        })
+
+        vm.$watch('good', {
+            deep:true, //开启深度监视
+            immediate: true,   //初始化时调用一次handler
+            handler(newValue, oldValue) {   //当监视发生改变时调用
+                console.log("newValue:" + newValue);
+                console.log("oldValue:" + oldValue);
+                }
+            });
+    </script>
+
+</body>
+
+</html>

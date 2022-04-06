@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script  type="text/javascript"  src="../vue.js"></script>
+</head>
+<!-- 
+    条件渲染：
+        v-if vi-else-if v-else
+        适用于频率较低的场景，直接移除不展示的DOM元素，结构不能打断
+        v-show 
+        适用于频率高的场景，实际是display='none'
+        template 和 v-if配套使用
+ -->
+<body>
+    <div id="hello">   
+        <button @click="add">点击显示</button>
+
+        <template v-if="n==3"> 
+            <div v-if="n===1"> 你好 </div>
+            <div v-else-if="n===2"> 世界 </div>
+            <div v-else> 世亚 </div>
+        </template>
+        
+    </div>
+
+
+
+    <script  type="text/javascript"> 
+        Vue.config.productionTip = false;
+        new Vue({    
+            el:"#hello",    
+            data:{   
+                name : 'yy',
+                n : 0 
+            },
+            methods: {
+                add(){
+                    if(this.n<3){
+                       return this.n++;
+                    }
+                    return this.n;
+                }
+            },
+        })
+    </script>
+    
+</body>
+</html>
