@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script type="text/javascript">
+        let data = {
+            name: '羊驼',
+            age: 'xx'
+        }
+
+        const obs = new observer(data);
+        console.log(obs);
+
+        let vm = {};
+        vm._data = data = obs;
+
+        //   代理方法，相当于在遍历时为params中每一个对象属性代理生成getter和setter方法
+        //   这样的做法相较于直接通过Object.defineProperty代理对象来说，可以有效的防止
+        //   无限递归调用
+
+        //在vue中实际加工时采取了递归寻找data下所有对象，直到不存在对象属性。
+        function observer(params) {
+            const keys = Object.keys(params);
+            keys.forEach((o) => {
+                Object.defineProperty(this, o, {
+                    get() {
+                        console.log('拿到了val');
+                        return params[o]
+                    },
+                    set(value) {
+                        console.log('val正在被加工');
+                        params[o] = value
+                    }
+                })
+            });
+        }
+    </script>
+</body>
+
+</html>
