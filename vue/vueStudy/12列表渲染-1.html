@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script  type="text/javascript"  src="../vue.js"></script>
+</head>
+<!-- 
+    v-for指令
+    用于展示列表数据，可遍历数组，对象，字符串，指定次数遍历
+
+    vue v-for遍历中key的作用
+     key是虚拟DOM的标识，当数据发生变化时Vue会根据新数据生成新的虚拟DOM，
+     随后使用新虚拟DOM与旧虚拟DOM进行比较（diff算法）：
+     如果找到了相同的key，则比较内容，如果内容也没有改变，直接复用之前的DOM
+     如果内容改变了，则生成新的DOM替换掉之前的DOM
+
+     如果没有找到相同的key,直接创建新的DOM渲染到页面上。
+
+    如果使用index作为key可能引发以下问题：
+        1.若对数据进行 逆向添加、删除等破坏数据顺序的操作
+            会导致没有必要的DOM更新，导致页面效率变低，但对展示无影响。
+        2.果然结构中包含了输入的DOM，会出现展示问题，但是页面数据混乱。
+    
+    最好使用数据对象的唯一标识作为key,如果数据仅用于展示且不对数据进行打乱顺序的操作，则可以使用index作为key
+ -->
+<body>
+    <div id="hello">
+        <ul>
+            <li v-for="(item, index) in name" :key="index">
+                {{item}}--{{index}}
+            </li>
+        </ul>
+        <ul>
+            <li v-for="(value, key) in house" :key="key">
+                {{key}}--{{value}}
+            </li>
+        </ul>
+        <ul>
+            <li v-for="(value, key) in str" :key="key">
+                {{key}}--{{value}}
+            </li>
+        </ul>
+        <br/><br/>
+        <ul>
+            <button @click="add">加入新同学</button>
+            <li v-for="(value, key) in study" :key="value.id">
+                {{value.name}}--{{value.age}}
+            </li>
+        </ul>
+    </div>
+
+    <script  type="text/javascript"> 
+        Vue.config.productionTip = false;
+        new Vue({    
+            el:"#hello",    
+            data:{   
+                name : ['yy','xx','gg','mm'],
+                house : {
+                    dis : '成都',
+                    air : '武侯区',
+                    ass : '500m²'
+                },
+                str : 'today is good day',
+                study : [
+                    {id:'001',name:'小明',age:'18'},
+                    {id:'002',name:'小红',age:'17'},
+                    {id:'003',name:'小张',age:'14'}
+                ]
+            },
+            methods: {
+                add() {
+                    const c = {id:'004',name:'小强',age:'19'};
+                    this.study.push(c);
+                }
+            },
+        })
+    </script>
+    
+</body>
+</html>

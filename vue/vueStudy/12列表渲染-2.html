@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script type="text/javascript" src="../vue.js"></script>
+</head>
+
+<body>
+    <div id="hello">
+        <input type="text" placeholder="输入查询" v-model="keyword">
+        <button @click="sort=1">升序排列</button>
+        <button @click="sort=2">降序排列</button>
+        <button @click="sort=0">原序排列</button>
+        <li v-for="(value, key) in inputselect" :key="value.id">
+            {{value.name}}--{{value.age}}
+        </li>
+    </div>
+    <script type="text/javascript">
+        Vue.config.productionTip = false;
+        new Vue({
+            el: "#hello",
+            data: {
+                keyword: '',
+                sort: 0,
+                study: [
+                    { id: '001', name: '王嘉然', age: '19' },
+                    { id: '002', name: '王贝拉', age: '20' },
+                    { id: '003', name: '王乃琳', age: '17' },
+                    { id: '004', name: '爹', age: '21' },
+                    { id: '005', name: '珈乐', age: '17' }
+                ]
+            },
+            computed: {
+                inputselect() {
+                    const arr = this.study.filter(p => {
+                        return p.name.indexOf(this.keyword) > -1
+                    })
+                    if (this.sort > 0) {
+                        arr.sort((a, b) => {
+                            return this.sort === 1 ? a.age - b.age : b.age - a.age
+                        })
+                    }
+                    return arr;
+                }
+            },
+
+        })
+    </script>
+
+</body>
+
+</html>
