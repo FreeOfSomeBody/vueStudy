@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script type="text/javascript" src="../../vue.js"></script>
+</head>
+
+<body>
+    <div id="root">
+        <h1>用户信息</h1>
+        <h1>名字：{{user.name}}</h1>
+        <h1>年龄：{{user.age}}</h1>
+        <h1>性别: {{user.sex}}</h1>
+        <h1 v-show="user.work">职业：{{user.work}}</h1>
+        <h3>特长：</h3>
+        <li v-for="(specialty, index) in user.specialties" :key="index+'1'">
+            {{specialty}}
+        </li>
+        <h3>爱好：</h3>
+        <li v-for="(hobby, index) in user.hobbies" :key="index+'2'">
+            {{hobby}}
+        </li>
+        <button @click="user.age++">年龄+1</button>
+        <button @click="getwork">添加职业属性</button>
+        <button @click="user.work='打工仔'">修改职业为打工仔</button>
+        <button @click="addhobby">添加爱好睡觉</button>
+        <button @click="updatehobby">修改爱好为挣钱</button>
+    </div>
+
+    <script type="text/javascript">
+        Vue.config.productionTip = false;
+        new Vue({
+            el: "#root",
+            data: {
+                user: {
+                    name: 'yy',
+                    age: '20',
+                    sex: '男',
+                    specialties: [
+                        '足球', '编程'
+                    ],
+                    hobbies: [
+                        '音乐', '游戏'
+                    ]
+                }
+            },
+            methods: {
+                getwork() {
+                    // Vue.set(this.user, 'work', '码农');
+                    this.$set(this.user, 'work', '码农');
+                },
+                addhobby(){
+                    this.user.hobbies.push('睡觉');
+                },
+                updatehobby(){
+                    this.user.hobbies.splice(0,1,'挣钱'); 
+                }
+            },
+        })
+    </script>
+
+</body>
+
+</html>

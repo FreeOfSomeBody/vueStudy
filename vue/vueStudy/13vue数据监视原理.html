@@ -7,7 +7,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+<!-- 
+    vue能监视data中所有层次的数据。
 
+    如何监视：
+        通过代理对象的setter监视，且要在new Vue时就传入要监视的数据
+            在对象中追加的数据，默认不是响应式的
+            要追加响应式数据需使用API
+                Vue.set(target,propertyName,value)或者
+                vm.$set(target,propertyName,value)
+    
+    vue如何的监视数组数据：
+        通过重写array原生的方法，在原生方法上添加了vue解析模板的逻辑，进而实现页面的更新
+
+    Vue更新数组的方法
+    push(),pop(),shift(),unshift(),splice(),sort(),reverse() 
+    或使用vm.$set(其实就是调原型Vue.set) Vue.set (注意！！！ set不能直接对vm和vm根数据使用)
+
+ -->
 <body>
     <script type="text/javascript">
         let data = {
@@ -29,7 +46,7 @@
         function observer(params) {
             const keys = Object.keys(params);
             keys.forEach((o) => {
-                Object.defineProperty(this, o, {
+                Object.defineProperty(this, o, {   
                     get() {
                         console.log('拿到了val');
                         return params[o]
@@ -43,5 +60,5 @@
         }
     </script>
 </body>
-
+ 
 </html>

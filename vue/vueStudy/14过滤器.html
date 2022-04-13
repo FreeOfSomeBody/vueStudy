@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script  type="text/javascript"  src="../vue.js"></script>
+    <script  type="text/javascript"  src="../dayjs.min.js"></script>
+</head>
+<!-- 
+    过滤器：
+        定义：对要显示的数据进行特定格式化后再显示
+        语法：
+            1.注册过滤器：Vue.filters(name,callback) 或者 new Vue(filters:{})
+            2.使用 {{xx | filterName}} 或 v-bind {{xx | filterName}}
+ -->
+
+<body>
+    <div id="root">
+        <h1>显示当前时间</h1>
+        <h1>现在是{{time}}</h1>
+        <h1>时间转换后：{{nowtime}}</h1>
+        <!-- 过滤器实现 -->
+        <h1>过滤器实现:{{time | timeFilter('YYYY-MM-DD') | filter2}}</h1>
+    </div>
+    <script  type="text/javascript"> 
+        Vue.config.productionTip = false;
+        //全局过滤器
+        Vue.filter('filter2',(value)=>
+            value.slice(0,4))
+
+        new Vue({    
+            el:"#root",    
+            data:{   
+                time : (new Date()).valueOf()
+            },
+            computed: {
+                nowtime() {
+                    return dayjs(this.time).format('YYYY-MM-DD HH:mm:ss');
+                }
+            },
+            filters: {
+                timeFilter: (value,str) => 
+                     dayjs(value).format(str)          
+            }
+        })
+    </script>
+    
+</body>
+</html>
