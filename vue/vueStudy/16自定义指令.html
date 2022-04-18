@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script  type="text/javascript"  src="../vue.js"></script>
+</head>
+<body>
+    <div id="hello">
+        <h1 v-text="name"></h1>
+        <h1 v-add="name+name"></h1>
+        <button @click="change">点我</button>
+    </div>
+    <script  type="text/javascript"> 
+        Vue.config.productionTip = false; 
+        new Vue({    
+            el:"#hello",    
+            data:{   
+                name : 'yy'
+            },
+            methods: {
+                change(){
+                    this.name=='yy'?this.name='xx':this.name='yy';
+                }
+            },
+            directives:{
+                //add函数在指令与模板绑定成功时会被调用，当模板发生改变重新解析时也会被调用
+                add(element,binding){
+                    console.log(element,binding);
+                    console.log('add');
+                    element.innerText = binding.value;
+                }
+            }
+        })
+    </script>
+    
+</body>
+</html>
