@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script  type="text/javascript"  src="../vue.js"></script>
+</head>
+<body>
+    <div id="hello">
+        <h1 :style="{opacity}">你好，星期六</h1>
+    </div>
+    <script  type="text/javascript"> 
+        Vue.config.productionTip = false;
+        new Vue({    
+            el:"#hello",    
+            data:{   
+                opacity : 1,
+             },
+             //生命周期的钩子函数，在模板将真实DOM放入页面，挂载完毕时自动调用
+             mounted () {
+                 setInterval(() => {
+                    this.opacity -= 0.15
+                    if(this.opacity<=0)this.opacity=1 
+                 }, 180); 
+             },
+        })
+    </script>
+    
+</body>
+</html>

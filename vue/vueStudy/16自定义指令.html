@@ -13,6 +13,12 @@
     </div>
     <script  type="text/javascript"> 
         Vue.config.productionTip = false; 
+        //全局自定义指令
+        // Vue.directive('add', function(element,binding){
+        //     console.log(element,binding);
+        //     console.log('add');
+        //     element.innerText = binding.value;
+        // })
         new Vue({    
             el:"#hello",    
             data:{   
@@ -29,6 +35,20 @@
                     console.log(element,binding);
                     console.log('add');
                     element.innerText = binding.value;
+                },
+                fadd:{
+                    //指令与元素绑定时调用
+                    bind:{
+
+                    },
+                    //指令元素被插入页面时
+                    inserted:{
+
+                    },
+                    //指令模板被重新解析时 
+                    update:{
+
+                    }
                 }
             }
         })
