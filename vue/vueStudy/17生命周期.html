@@ -1,30 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
-    <script  type="text/javascript"  src="../vue.js"></script>
+    <script type="text/javascript" src="../vue.js"></script>
 </head>
+
 <body>
     <div id="hello">
         <h1 :style="{opacity}">你好，星期六</h1>
+        <button @click="destroy">销毁vm</button>
+        <button @click="update">更新字体透明度</button>
     </div>
-    <script  type="text/javascript"> 
+    <script type="text/javascript">
         Vue.config.productionTip = false;
-        new Vue({    
-            el:"#hello",    
-            data:{   
-                opacity : 1,
-             },
-             //生命周期的钩子函数，在模板将真实DOM放入页面，挂载完毕时自动调用
-             mounted () {
-                 setInterval(() => {
-                    this.opacity -= 0.15
-                    if(this.opacity<=0)this.opacity=1 
-                 }, 180); 
-             },
+        new Vue({
+            el: "#hello",
+            data: {
+                opacity: 1,
+            },
+
+            // 在实例初始化之后,进行数据侦听和事件/侦听器的配置之前同步调用。
+            beforeCreate() {
+                console.log('创建前调用钩子');
+            },
+
+            // 在实例创建完成后被立即同步调用。在这一步中，实例已完成对选项的处理，意味着以下内容已被配置完毕：数据侦听、计算属性、方法、事件/侦听器的回调函数。然而，挂载阶段还没开始，且 $el property 目前尚不可用。
+            created() {
+                console.log('创建时调用钩子');
+            },
+
+            // 在挂载开始之前被调用：相关的 render 函数首次被调用。该钩子在服务器端渲染期间不被调用。
+            beforeMount() {
+                console.log('挂载前调用钩子');
+            },
+
+            //生命周期的钩子函数，在模板将真实DOM放入页面，挂载完毕时自动调用
+            // 实例被挂载后调用，这时 el 被新创建的 vm.$el 替换了。如果根实例挂载到了一个文档内的元素上，当 mounted 被调用时 vm.$el 也在文档内。注意 mounted 不会保证所有的子组件也都被挂载完成。如果你希望等到整个视图都渲染完毕再执行某些操作，可以在 mounted 内部使用 vm.$nextTick
+            mounted() {
+                //  setInterval(() => {
+                //     this.opacity -= 0.15
+                //     if(this.opacity<=0)this.opacity=1 
+                //  }, 180); 
+                console.log('挂载时调用钩子');
+            },
+
+            // 在数据发生改变后，DOM 被更新之前被调用。这里适合在现有 DOM 将要被更新之前访问它，比如移除手动添加的事件监听器。该钩子在服务器端渲染期间不被调用，因为只有初次渲染会在服务器端进行。
+            beforeUpdate() {
+                console.log('更新前调用钩子');
+            },
+
+            // 在数据更改导致的虚拟 DOM 重新渲染和更新完毕之后被调用。
+            updated() {
+                console.log('更新时调用钩子');
+            },
+
+            //实例销毁之前调用。在这一步，实例仍然完全可用。 
+            beforeDestroy() {
+                console.log('销毁前调用钩子');
+            },
+
+            // 实例销毁后调用。该钩子被调用后，对应 Vue 实例的所有指令都被解绑，所有的事件监听器被移除，所有的子实例也都被销毁。
+            //需注意原生DOM事件依然有效
+            destroyed() {
+                console.log('销毁调用钩子');
+            },
+            methods: {
+                destroy() {
+                    this.$destroy();
+                },
+                update() {
+                    this.opacity = 0.1
+                }
+            },
         })
     </script>
-    
+
 </body>
+
 </html>

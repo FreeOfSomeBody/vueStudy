@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script type="text/javascript" src="../vue.js"></script>
+</head>
+<!-- 
+
+    组件注意点：
+        1.组件名：
+            一个单词组成  apple 或 Apple
+            多个单吃组成  eat-apple 或 EatApple(需要脚手架支持)
+        2.组件标签：
+            <apple></apple> 或 <apple/> (需脚手架支持，否则后续标签不渲染)
+        3.创建组件简写
+            const a = {
+                options
+            }
+ -->
+<body>
+    <div id="hello">
+        <!-- 3.调用组件 -->
+        <hi></hi>
+        <work></work>
+        <hr>
+        <home></home>
+        <hi></hi>
+    </div>
+    <script type="text/javascript">
+        Vue.config.productionTip = false;
+
+
+        //1.创建组件
+        const work = Vue.extend({
+            template: ` 
+        <div>
+            <h1>{{address}}</h1>
+            <h1>{{name}}</h1>
+            <button @click='gohome'>回家</button>    
+        </div>
+        `,
+            data() {
+                return {
+                    address: '成都',
+                    name: '烟草兴业大厦'
+                }
+            },
+            methods: {
+                gohome() {
+                    this.name == '龙湖世纪峰景' ? alert('已经在家了') : this.name = '龙湖世纪峰景'
+                }
+            },
+        })
+
+        const home = Vue.extend({
+            template: `
+        <div>
+            <h1>{{homeName}}</h1>
+            <h1>{{address}}</h1>    
+        </div>
+        `,
+            data() {
+                return {
+                    homeName: '龙湖世纪峰景',
+                    address: '世纪城'
+                }
+            }
+        })
+
+        const hi = Vue.extend({
+            template: `
+            <div>
+            <h1>{{say}}</h1>
+            </div>
+           `,
+            data() {
+                return {
+                    say: 'hello'
+                }
+            },
+        })
+
+        //注册全局组件
+        Vue.component("hi", hi);
+
+        new Vue({
+            el: "#hello",
+            data: {
+                name: 'yy'
+            },
+            //2.注册组件（局部调用）
+            components: {
+                work,
+                home
+            },
+        })
+    </script>
+
+
+</body>
+
+</html>
