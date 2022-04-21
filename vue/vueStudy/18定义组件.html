@@ -19,14 +19,16 @@
                 options
             }
  -->
+
 <body>
     <div id="hello">
         <!-- 3.调用组件 -->
-        <hi></hi>
+        <!-- <hi></hi>
         <work></work>
         <hr>
         <home></home>
-        <hi></hi>
+        <hi></hi> -->
+        <app></app>
     </div>
     <script type="text/javascript">
         Vue.config.productionTip = false;
@@ -85,6 +87,21 @@
         //注册全局组件
         Vue.component("hi", hi);
 
+        //组件嵌套
+        const app = Vue.extend({
+            template: `
+            <div>
+                <hi></hi>
+                <work></work>
+                <home></home>
+            </div>
+            `,
+            components: {
+                work,
+                home
+            }
+        })
+
         new Vue({
             el: "#hello",
             data: {
@@ -92,10 +109,9 @@
             },
             //2.注册组件（局部调用）
             components: {
-                work,
-                home
+                app
             },
-        })
+        }) 
     </script>
 
 
