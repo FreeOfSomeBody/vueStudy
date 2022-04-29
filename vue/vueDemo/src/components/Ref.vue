@@ -15,7 +15,7 @@
 
 <script>
     export default {
-        name:'School',
+        name:'Ref',
         data() {
             return {
                 address: '成都',
