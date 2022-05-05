@@ -4,9 +4,13 @@
 import Vue from 'vue'
 // 引入APP组件
 import App from './App.vue'
+//引入插件
+import plugins from './plugins'
 
 Vue.config.productionTip = false
 
+//使用插件
+Vue.use(plugins)
 /*
   关于不同版本的vue.js
     vue.js是完整的vue 包含了核心功能和模板解析器。
